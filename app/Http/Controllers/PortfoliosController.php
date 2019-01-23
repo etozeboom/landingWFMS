@@ -15,8 +15,8 @@ class PortfoliosController extends Controller
 		
 		if(view()->exists('admin.portfolios')) {
 			
-			$portfolio = Portfolio::all();
-			
+			//$portfolio = Portfolio::all();
+			$portfolio = Portfolio::simplePaginate(4);
 			$data = [
 					'title'=>'Страницы',
 					'portfolios'=>$portfolio

@@ -30,7 +30,7 @@
 		@endforeach	
         </tbody>
     </table>
-	
+	{{ $portfolios->links() }}
 	@endif
 	
 	{!! Html::link(route('portfoliosAdd'),'Новая страница') !!}
