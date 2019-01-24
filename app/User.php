@@ -40,18 +40,41 @@ class User extends Authenticatable
             $builder->where('age', '<', 10);
         });*/
     }
+    /* protected $events = [
+        'saved' => UserSaved::class,
+        'deleted' => UserDeleted::class,
+    ];*/
 
     public function scopeAge($query, $var)
     {
         return $query->where('age', '>', $var);
     }
     
+    
+
     public function phone()
     {
         return $this->hasOne('App\Phone');
     }
-   /* protected $events = [
-        'saved' => UserSaved::class,
-        'deleted' => UserDeleted::class,
-    ];*/
+    public function getNameAttribute($value)
+    {
+        return strtoupper($value);
+    }
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtoupper($value);
+    }
+
+    protected $dateFormat = 'Y-m-d H:i:s';
+    protected $casts = [
+        //'age' => 'boolean',
+    ];
+
+
+    protected $appends = ['is_admin'];
+    public function getIsAdminAttribute()
+    {
+        return $this->attributes['age'] == '0';
+    }
+   
 }
