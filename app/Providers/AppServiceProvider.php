@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\User;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
+use App\Observers\UserObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +17,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        DB::listen(function ($query) {
+            dump($query->sql);
+            dump($query->bindings);
+            // $query->time
+        });
+
+        User::observe(UserObserver::class);
     }
 
     /**

@@ -15,9 +15,10 @@ class ServicesAddController extends Controller
     public function execute(Request $request) {
     	
     	if($request->isMethod('post')) {
+			//dump($request);
 			$input = $request->except('_token');
 			
-			
+			//dump($input);
 			
 			 $validator = Validator::make($input, [
 	            'name' => 'required|max:255',
